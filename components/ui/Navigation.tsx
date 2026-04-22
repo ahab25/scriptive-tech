@@ -91,9 +91,11 @@ export function Navigation() {
           </ul>
 
           <div className="hidden md:block">
-            <MagneticButton size="sm" variant="outline">
-              Start a project →
-            </MagneticButton>
+            <Link href="/#contact" data-cursor="hover">
+              <MagneticButton size="sm" variant="outline">
+                Start a project →
+              </MagneticButton>
+            </Link>
           </div>
 
           {/* Mobile trigger */}
