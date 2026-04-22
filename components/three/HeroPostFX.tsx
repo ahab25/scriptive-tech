@@ -19,7 +19,7 @@ import { Vector2 } from "three";
  */
 export function HeroPostFX() {
   return (
-    <EffectComposer multisampling={0} disableNormalPass>
+    <EffectComposer multisampling={0}>
       <Bloom
         mipmapBlur
         intensity={0.9}
