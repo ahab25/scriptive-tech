@@ -1,19 +1,8 @@
+import nodemailer from "nodemailer";
 import { type NextRequest, NextResponse } from "next/server";
 
-/**
- * POST /api/contact
- *
- * Accepts the contact form payload, validates it, applies a simple
- * edge-friendly rate limit (1 request per IP per 60 s), then sends
- * an email via Resend (https://resend.com).
- *
- * Setup:
- *   1. pnpm add resend
- *   2. Set RESEND_API_KEY and CONTACT_EMAIL_TO in your .env.local
- *
- * If you're not using Resend, replace the send block at the bottom
- * with any SMTP / SaaS call you prefer.
- */
+// Force Node.js runtime — nodemailer needs net/tls which aren't in Edge
+export const runtime = "nodejs";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -27,7 +16,7 @@ type ContactPayload = {
 };
 
 // ---------------------------------------------------------------------------
-// Validation — no heavy schema library, just the essentials
+// Validation
 // ---------------------------------------------------------------------------
 function validate(body: unknown): ContactPayload {
   if (!body || typeof body !== "object") throw new Error("Empty request body.");
@@ -47,10 +36,9 @@ function validate(body: unknown): ContactPayload {
     name: name.trim(),
     email: email.trim().toLowerCase(),
     message: message.trim(),
-    interests:
-      Array.isArray((body as Record<string, unknown>).interests)
-        ? ((body as Record<string, unknown>).interests as string[]).slice(0, 10)
-        : [],
+    interests: Array.isArray((body as Record<string, unknown>).interests)
+      ? ((body as Record<string, unknown>).interests as string[]).slice(0, 10)
+      : [],
     budget:
       typeof (body as Record<string, unknown>).budget === "string"
         ? ((body as Record<string, unknown>).budget as string)
@@ -59,8 +47,7 @@ function validate(body: unknown): ContactPayload {
 }
 
 // ---------------------------------------------------------------------------
-// Simple in-memory rate limiter (per Vercel Edge Function instance).
-// For production use, replace with Upstash Redis or Vercel KV.
+// Rate limiter (in-memory, per instance)
 // ---------------------------------------------------------------------------
 const ipTimestamps = new Map<string, number[]>();
 
@@ -77,8 +64,7 @@ function rateLimit(ip: string, maxPerMinute = 3): boolean {
 // HTML email template
 // ---------------------------------------------------------------------------
 function emailHtml(p: ContactPayload): string {
-  return `
-<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -100,30 +86,40 @@ function emailHtml(p: ContactPayload): string {
     <div class="value">${p.name} &lt;${p.email}&gt;</div>
     <div class="label">Message</div>
     <div class="value">${p.message.replace(/\n/g, "<br/>")}</div>
-    ${
-      p.interests && p.interests.length > 0
-        ? `<div class="label">Interests</div>
+    ${p.interests && p.interests.length > 0
+      ? `<div class="label">Interests</div>
     <div class="value">${p.interests.map((t) => `<span class="tag">${t}</span>`).join("")}</div>`
-        : ""
-    }
-    ${
-      p.budget
-        ? `<div class="label">Budget</div>
+      : ""}
+    ${p.budget
+      ? `<div class="label">Budget</div>
     <div class="value">${p.budget}</div>`
-        : ""
-    }
+      : ""}
     <hr />
-    <div style="font-size:11px; color:#4a4a6a;">Sent via scriptive.agency · ${new Date().toUTCString()}</div>
+    <div style="font-size:11px; color:#4a4a6a;">Sent via scriptive.tech · ${new Date().toUTCString()}</div>
   </div>
 </body>
 </html>`;
 }
 
 // ---------------------------------------------------------------------------
+// SMTP transporter (created once per instance)
+// ---------------------------------------------------------------------------
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT ?? "587"),
+    secure: process.env.SMTP_PORT === "465",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Handler
 // ---------------------------------------------------------------------------
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  // Rate limit by IP
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
 
@@ -134,7 +130,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // Parse + validate
   let payload: ContactPayload;
   try {
     const raw = await req.json();
@@ -146,46 +141,36 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // Guard: env vars must be present
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL_TO ?? "hello@scriptive.agency";
-
-  if (!apiKey) {
-    // In development, log and pretend success so you can build without Resend
+  // In development without SMTP vars, log and return success
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     if (process.env.NODE_ENV !== "production") {
-      console.log("[contact/dev]", payload);
+      console.log("[contact/dev] SMTP not configured — payload logged:", payload);
       return NextResponse.json({ ok: true, dev: true });
     }
-    return NextResponse.json({ error: "Mail service not configured." }, { status: 503 });
+    return NextResponse.json(
+      { error: "Mail service not configured." },
+      { status: 503 },
+    );
   }
 
-  // Send via Resend REST API (avoids importing the SDK for edge compat)
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "SCRIPTIVE Contact <no-reply@scriptive.agency>",
-        to,
-        reply_to: payload.email,
-        subject: `New enquiry from ${payload.name}`,
-        html: emailHtml(payload),
-        text: `Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`,
-      }),
-    });
+  const to = process.env.CONTACT_EMAIL_TO ?? "hello@scriptive.tech";
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("[contact] Resend error:", err);
-      throw new Error("Failed to send email.");
-    }
+  try {
+    const transporter = createTransporter();
+    await transporter.sendMail({
+      from: `"SCRIPTIVE Website" <${process.env.SMTP_USER}>`,
+      to,
+      replyTo: payload.email,
+      subject: `New enquiry from ${payload.name}`,
+      html: emailHtml(payload),
+      text: `Name: ${payload.name}\nEmail: ${payload.email}\n\nMessage:\n${payload.message}${
+        payload.interests?.length ? `\n\nInterests: ${payload.interests.join(", ")}` : ""
+      }${payload.budget ? `\nBudget: ${payload.budget}` : ""}`,
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[contact]", err);
+    console.error("[contact] SMTP error:", err);
     return NextResponse.json(
       { error: "Message could not be sent. Please email us directly." },
       { status: 500 },
@@ -193,7 +178,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 }
 
-// Reject non-POST methods
 export function GET() {
   return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }
