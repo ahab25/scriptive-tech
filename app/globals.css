@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------------
+   FONT DECLARATIONS
+   Using Fontshare CDN for Clash Display + Satoshi (genuinely
+   distinctive — NOT the overused Space Grotesk / Inter combo).
+----------------------------------------------------------------- */
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap");
+
+:root {
+  --font-clash: "Clash Display", system-ui, sans-serif;
+  --font-satoshi: "Satoshi", system-ui, sans-serif;
+  --font-jetbrains: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Palette tokens — mirror Tailwind config */
+  --obsidian: #0a0a0f;
+  --obsidian-deep: #06060a;
+  --neon-cyan: #00e5ff;
+  --neon-violet: #8b5cf6;
+  --neon-magenta: #ff2d95;
+
+  /* Cursor-tracked gradient */
+  --mx: 50%;
+  --my: 50%;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-satoshi);
+  background: var(--obsidian);
+  color: #e6e6ef;
+  overflow-x: hidden;
+  cursor: none; /* Custom cursor takes over — hidden on touch devices via media query */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* -----------------------------------------------------------------
+   SELECTION — cyan highlight matches brand
+----------------------------------------------------------------- */
+::selection {
+  background: var(--neon-cyan);
+  color: var(--obsidian-deep);
+}
+
+/* -----------------------------------------------------------------
+   SCROLLBAR — minimal, neon-tinted
+----------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--obsidian-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-violet));
+  border-radius: 8px;
+}
+
+/* -----------------------------------------------------------------
+   UTILITIES
+----------------------------------------------------------------- */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Glass panel — layered background, inset highlight, backdrop-blur */
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Neon gradient text — animated shimmer */
+  .text-neon {
+    background: linear-gradient(
+      110deg,
+      #00e5ff 0%,
+      #66f0ff 20%,
+      #c084fc 50%,
+      #8b5cf6 80%,
+      #00e5ff 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Grainy texture overlay — gives the site a tactile, filmic feel */
+  .grain {
+    position: relative;
+    isolation: isolate;
+    overflow: clip; /* prevent ::before inset:-50% from adding scroll height below footer */
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background-image: url("/textures/noise.svg");
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+    animation: grain 8s steps(6) infinite;
+  }
+
+  /* Cyan outline for keyboard focus — a11y */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950;
+  }
+
+  /* Hide custom cursor surfaces where native cursor should persist (inputs) */
+  .native-cursor,
+  .native-cursor * {
+    cursor: text !important;
+  }
+
+  /* Magnetic hover target — the JS adds translate; the CSS smooths it */
+  .magnet {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+}
+
+/* -----------------------------------------------------------------
+   PRE-HYDRATION LOADER — avoids flash of unstyled content
+----------------------------------------------------------------- */
+.pre-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--obsidian);
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+}
+
+/* -----------------------------------------------------------------
+   MOTION PREFERENCES
+----------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

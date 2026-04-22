@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06060a"/>
+      <stop offset="1" stop-color="#0f1018"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ff2d95"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="260" fill="#00e5ff" opacity="0.12"/>
+  <circle cx="180" cy="520" r="220" fill="#8b5cf6" opacity="0.14"/>
+
+  <text x="80" y="120" fill="#00e5ff" font-family="ui-monospace, monospace" font-size="18" letter-spacing="4">
+    [ SCRIPTIVE · STUDIO ]
+  </text>
+
+  <text x="80" y="330" fill="white" font-family="system-ui, sans-serif" font-weight="700" font-size="110" letter-spacing="-4">
+    We build
+  </text>
+  <text x="80" y="450" fill="url(#accent)" font-family="system-ui, sans-serif" font-weight="700" font-size="110" letter-spacing="-4" font-style="italic">
+    digital
+  </text>
+  <text x="80" y="570" fill="white" font-family="system-ui, sans-serif" font-weight="700" font-size="110" letter-spacing="-4">
+    experiences.
+  </text>
+</svg>
