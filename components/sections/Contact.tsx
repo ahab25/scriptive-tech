@@ -133,7 +133,7 @@ export function Contact() {
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
                     Studio
                   </span>
-                  <span className="text-white">{SITE.address}</span>
+                  <span className="text-white">Karachi · Islamabad, Pakistan &amp; California, USA</span>
                 </div>
               </div>
             </div>
