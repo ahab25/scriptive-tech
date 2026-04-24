@@ -15,6 +15,14 @@ const TEAM = [
     accent: "cyan" as const,
   },
   {
+    name: "Taba Sualeh",
+    role: "Founder & CEO",
+    bio: "Shapes studio culture and client relationships. Champion of quality at every stage of the product lifecycle.",
+    avatar: "/images/team/taba.jpeg",
+    tags: ["Culture", "Clients", "Quality"],
+    accent: "magenta" as const,
+  },
+  {
     name: "Kulsoom Ansari",
     role: "CEO & Co-Founder",
     bio: "Drives operations, partnerships, and growth. Turns ambitious briefs into on-time, on-budget deliverables.",
@@ -22,14 +30,6 @@ const TEAM = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
     tags: ["Operations", "Growth", "Partnerships"],
     accent: "violet" as const,
-  },
-  {
-    name: "Taba Sualeh",
-    role: "Founder & CEO",
-    bio: "Shapes studio culture and client relationships. Champion of quality at every stage of the product lifecycle.",
-    avatar: "/images/team/taba.jpeg",
-    tags: ["Culture", "Clients", "Quality"],
-    accent: "magenta" as const,
   },
   {
     name: "Tanzeela Jabbar",
