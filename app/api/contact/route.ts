@@ -100,6 +100,52 @@ function emailHtml(p: ContactPayload): string {
 </body>
 </html>`;
 }
+//--------HTML REPLY TEMPLATE
+function autoReplyHtml(name: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0a;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#111111;border:1px solid #222222;border-radius:4px;">
+          <tr>
+            <td style="padding:40px 48px 32px;border-bottom:1px solid #1e1e1e;">
+              <p style="margin:0;font-size:13px;letter-spacing:0.2em;color:#555555;text-transform:uppercase;">SCRIPTIVE</p>
+              <p style="margin:6px 0 0;font-size:11px;color:#333333;letter-spacing:0.1em;">studio / karachi · est. 2020</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:48px 48px 40px;">
+              <h1 style="margin:0 0 24px;font-size:28px;font-weight:600;color:#f0f0f0;line-height:1.3;letter-spacing:-0.02em;">We got your message.</h1>
+              <p style="margin:0 0 20px;font-size:15px;color:#888888;line-height:1.8;">Hi ${name},</p>
+              <p style="margin:0 0 20px;font-size:15px;color:#888888;line-height:1.8;">Thank you for reaching out to SCRIPTIVE. We've received your message and we're glad you did.</p>
+              <p style="margin:0 0 32px;font-size:15px;color:#888888;line-height:1.8;">Someone from our team will get back to you within <span style="color:#f0f0f0;font-weight:500;">48 hours</span>. In the meantime, feel free to explore our work at <a href="https://www.scriptive.tech" style="color:#f0f0f0;text-decoration:none;border-bottom:1px solid #333333;">scriptive.tech</a>.</p>
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background-color:#f0f0f0;border-radius:2px;">
+                    <a href="https://www.scriptive.tech/#work" style="display:inline-block;padding:14px 28px;font-size:13px;font-weight:600;color:#0a0a0a;text-decoration:none;letter-spacing:0.05em;">View our work →</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px 48px;border-top:1px solid #1e1e1e;background-color:#0d0d0d;">
+              <p style="margin:0;font-size:12px;color:#333333;">© 2026 SCRIPTIVE — all rights reserved</p>
+              <p style="margin:4px 0 0;font-size:12px;color:#333333;">Karachi · Remote · Worldwide</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
 
 // ---------------------------------------------------------------------------
 // SMTP transporter (created once per instance)
@@ -166,6 +212,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       text: `Name: ${payload.name}\nEmail: ${payload.email}\n\nMessage:\n${payload.message}${
         payload.interests?.length ? `\n\nInterests: ${payload.interests.join(", ")}` : ""
       }${payload.budget ? `\nBudget: ${payload.budget}` : ""}`,
+    });
+     // 2. Send auto-reply to the user
+    await transporter.sendMail({
+      from: `"SCRIPTIVE" <${process.env.SMTP_USER}>`,
+      to: payload.email,
+      subject: `We received your message — SCRIPTIVE`,
+      html: autoReplyHtml(payload.name),
+      text: `Hi ${payload.name},\n\nThank you for reaching out to SCRIPTIVE. We've received your message and will get back to you within 48 hours.\n\nBest regards,\nTeam SCRIPTIVE\nscriptive.tech`,
     });
 
     return NextResponse.json({ ok: true });
