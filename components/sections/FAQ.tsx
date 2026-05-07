@@ -2,8 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { RevealText } from "../ui/RevealText";
-import { SectionLabel } from "../ui/SectionLabel";
 
 const FAQS = [
   {
@@ -28,41 +26,63 @@ const FAQS = [
   },
 ] as const;
 
-function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
+function FAQCard({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
+  const num = String(index + 1).padStart(2, "0");
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="border-b border-white/8"
+      viewport={{ once: true, margin: "-8%" }}
+      transition={{ duration: 0.65, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className={`rounded-2xl border transition-colors duration-300 ${
+        open
+          ? "border-neon-cyan/30 bg-white/[0.05]"
+          : "border-white/8 bg-white/[0.03] hover:border-white/15"
+      }`}
     >
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="group flex w-full items-start justify-between gap-6 py-7 text-left"
+        className="flex w-full items-center gap-4 px-6 py-5 text-left md:gap-6 md:px-8 md:py-6"
       >
+        {/* Number badge */}
         <span
-          className={`font-display text-lg leading-snug transition-colors duration-300 md:text-xl ${
-            open ? "text-white" : "text-white/70 group-hover:text-white"
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-sm font-bold transition-colors duration-300 md:h-10 md:w-10 ${
+            open ? "bg-neon-cyan text-obsidian-1000" : "bg-white/10 text-white/60"
+          }`}
+        >
+          {num}
+        </span>
+
+        {/* Question */}
+        <span
+          className={`flex-1 font-display text-base leading-snug transition-colors duration-300 md:text-lg ${
+            open ? "text-white" : "text-white/80"
           }`}
         >
           {q}
         </span>
 
-        {/* +/× icon */}
+        {/* Chevron badge */}
         <span
-          className={`relative mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-            open
-              ? "border-neon-cyan bg-neon-cyan/10 text-neon-cyan rotate-45"
-              : "border-white/20 text-white/40 group-hover:border-white/40 group-hover:text-white"
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-all duration-300 md:h-10 md:w-10 ${
+            open ? "bg-neon-cyan text-obsidian-1000" : "bg-white/10 text-white/50"
           }`}
         >
-          <svg viewBox="0 0 14 14" fill="none" className="h-3 w-3">
-            <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
       </button>
@@ -73,12 +93,14 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="pb-7 pr-12 text-white/60 leading-relaxed md:pr-20">
-              {a}
-            </p>
+            <div className="border-t border-white/8 px-6 py-5 md:px-8 md:py-6">
+              <p className="text-white/60 leading-relaxed md:pl-16">
+                {a}
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -95,41 +117,54 @@ export function FAQ() {
       {/* Ambient glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute right-0 top-1/2 h-[50vh] w-[40vw] -translate-y-1/2 rounded-full bg-gradient-to-l from-neon-cyan/6 to-transparent blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/4 h-[50vh] w-[60vw] -translate-x-1/2 rounded-full bg-gradient-to-b from-neon-cyan/6 to-transparent blur-3xl"
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid gap-16 lg:grid-cols-12">
+      <div className="relative mx-auto max-w-[860px] px-6 lg:px-10">
 
-          {/* Left — sticky heading */}
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-32">
-              <SectionLabel index="07">FAQ</SectionLabel>
-              <RevealText
-                as="h2"
-                className="mt-8 font-display text-display-sm text-white text-balance"
-              >
-                Questions we hear every day.
-              </RevealText>
-              <p className="mt-6 max-w-sm text-white/60 leading-relaxed">
-                Still not answered? Drop us a line at{" "}
-                <a
-                  href="mailto:hello@scriptive.tech"
-                  className="text-neon-cyan transition-opacity hover:opacity-75"
-                >
-                  hello@scriptive.tech
-                </a>
-              </p>
-            </div>
-          </div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14 text-center"
+        >
+          <span className="inline-block rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neon-cyan">
+            Got questions?
+          </span>
+          <h2 className="mt-6 font-display text-4xl text-white tracking-[-0.03em] md:text-5xl lg:text-6xl">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-4 text-white/50 leading-relaxed">
+            Everything you need to know before kicking off your project.<br className="hidden sm:block" />
+            No surprises, no hidden fees.
+          </p>
+        </motion.div>
 
-          {/* Right — accordion */}
-          <div className="lg:col-span-8">
-            {FAQS.map((item, i) => (
-              <FAQItem key={i} q={item.q} a={item.a} index={i} />
-            ))}
-          </div>
+        {/* Cards */}
+        <div className="flex flex-col gap-3">
+          {FAQS.map((item, i) => (
+            <FAQCard key={i} q={item.q} a={item.a} index={i} />
+          ))}
         </div>
+
+        {/* Footer CTA */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-12 text-center text-sm text-white/40"
+        >
+          Still have questions?{" "}
+          <a
+            href="mailto:hello@scriptive.tech"
+            className="text-neon-cyan transition-opacity hover:opacity-75"
+          >
+            hello@scriptive.tech
+          </a>
+        </motion.p>
       </div>
     </section>
   );
