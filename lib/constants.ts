@@ -23,4 +23,7 @@ export const NAV_LINKS = [
 export const SOCIAL = [
   { label: "Instagram", href: "https://www.instagram.com/scriptive_tech?igsh=MWxsMG56djZraWNpMw==" },
   { label: "LinkedIn", href: "https://www.linkedin.com/company/scriptive-tech/" },
+  { label: "Facebook", href: "https://www.facebook.com/share/1LkH7uJMza/?mibextid=wwXIfr" },
+  { label: "Twitter", href: "/" },
+  { label: "Dribbble", href: "/" },
 ] as const;
