@@ -1,7 +1,7 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server";
 
-const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const SYSTEM_PROMPT = `You are a helpful assistant for Scriptive, a premium software studio based in UAE, Pakistan, and USA.
 
@@ -23,30 +23,22 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
 
-    // Separate last user message from history
-    const history = messages.slice(0, -1).map((msg: { role: string; content: string }) => ({
-      role: msg.role === "assistant" ? "model" : "user",
-      parts: [{ text: msg.content }],
-    }));
-
-    const lastMessage = messages[messages.length - 1].content;
-
-    const model = client.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      systemInstruction: SYSTEM_PROMPT,
+    const stream = await client.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 512,
+      stream: true,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...messages,
+      ],
     });
-
-    const chat = model.startChat({ history });
-    const result = await chat.sendMessageStream(lastMessage);
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
-        for await (const chunk of result.stream) {
-          const text = chunk.text();
-          if (text) {
-            controller.enqueue(encoder.encode(text));
-          }
+        for await (const chunk of stream) {
+          const text = chunk.choices[0]?.delta?.content || "";
+          if (text) controller.enqueue(encoder.encode(text));
         }
         controller.close();
       },
@@ -56,7 +48,7 @@ export async function POST(req: NextRequest) {
       headers: { "Content-Type": "text/plain; charset=utf-8" },
     });
   } catch (error) {
-    console.error("Gemini error:", error);
+    console.error("Groq error:", error);
     return NextResponse.json({ error: "Chat unavailable" }, { status: 500 });
   }
 }
