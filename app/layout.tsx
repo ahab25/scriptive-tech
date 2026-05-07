@@ -2,8 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { ChatWidget } from "@/components/ui/ChatWidget";
 import { Cursor } from "@/components/ui/Cursor";
 import { Preloader } from "@/components/ui/Preloader";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -131,6 +133,8 @@ export default function RootLayout({
 
         <Preloader />
         <Cursor />
+        <WhatsAppButton />
+        <ChatWidget />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
