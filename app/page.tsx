@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { FAQ } from "@/components/sections/FAQ";
 import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Portfolio } from "@/components/sections/Portfolio";
@@ -50,6 +51,7 @@ export default function HomePage() {
         <Portfolio />
         <Process />
         <Testimonials />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
