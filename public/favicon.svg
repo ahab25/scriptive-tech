@@ -1,10 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="14" fill="#06060a"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.2"/>
-  <!-- < -->
-  <polyline points="24,15 10,32 24,49" stroke="#00e5ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- / -->
-  <line x1="30" y1="49" x2="36" y2="15" stroke="#00e5ff" stroke-width="5" stroke-linecap="round"/>
-  <!-- > -->
-  <polyline points="40,15 54,32 40,49" stroke="#00e5ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Background -->
+  <rect width="64" height="64" rx="13" fill="#04091a"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="11.5" stroke="#1D6AFF" stroke-width="1" stroke-opacity="0.25"/>
+
+  <defs>
+    <linearGradient id="fg" x1="8" y1="18" x2="56" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4D8FFF"/>
+      <stop offset="100%" stop-color="#1D6AFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- < bracket -->
+  <polyline points="22,20 12,32 22,44" stroke="url(#fg)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- / slash -->
+  <line x1="37" y1="18" x2="27" y2="46" stroke="url(#fg)" stroke-width="3.8" stroke-linecap="round"/>
+  <!-- > bracket -->
+  <polyline points="42,20 52,32 42,44" stroke="url(#fg)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

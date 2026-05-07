@@ -26,7 +26,7 @@ export function Services() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <SectionLabel index="04">What we do</SectionLabel>
+              <SectionLabel index="03">What we do</SectionLabel>
               <RevealText
                 as="h2"
                 className="mt-8 font-display text-display-md text-white text-balance"
@@ -55,12 +55,12 @@ export function Services() {
             {SERVICES.map((service, i) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
+                initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-8%" }}
                 transition={{
-                  duration: 0.8,
-                  delay: (i % 3) * 0.08,
+                  duration: 0.9,
+                  delay: (i % 3) * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >

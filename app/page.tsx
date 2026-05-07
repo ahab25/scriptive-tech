@@ -5,7 +5,6 @@ import { Hero } from "@/components/sections/Hero";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
 import { Services } from "@/components/sections/Services";
-import { Team } from "@/components/sections/Team";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Marquee } from "@/components/ui/Marquee";
 import { Navigation } from "@/components/ui/Navigation";
@@ -45,7 +44,6 @@ export default function HomePage() {
       <main id="main" className="grain">
         <Hero />
         <About />
-        <Team />
         <Marquee items={MARQUEE_ITEMS} />
         <Services />
         <Marquee items={COLLABORATORS} variant="collaborators" />

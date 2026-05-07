@@ -5,8 +5,8 @@ export const SITE = {
     "SCRIPTIVE is a modern software agency crafting award-winning websites, mobile apps, 3D experiences, and AI-powered products.",
   url: "https://scriptive.tech",
   email: "hello@scriptive.tech",
-  phone: "+92 340 2303003",
-  address: "Karachi · Remote · Worldwide",
+  phone: "+971 52 275 7434",
+  address: "UAE · Pakistan · USA",
   ogImage: "/og.svg",
   author: "SCRIPTIVE Studio",
   locale: "en_US",
@@ -14,7 +14,6 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: "About", href: "/#about" },
-  { label: "Team", href: "/#team" },
   { label: "Services", href: "/#services" },
   { label: "Work", href: "/#work" },
   { label: "Process", href: "/#process" },

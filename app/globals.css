@@ -14,12 +14,12 @@
   --font-satoshi: "Satoshi", system-ui, sans-serif;
   --font-jetbrains: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Palette tokens — mirror Tailwind config */
-  --obsidian: #0a0a0f;
-  --obsidian-deep: #06060a;
-  --neon-cyan: #00e5ff;
-  --neon-violet: #8b5cf6;
-  --neon-magenta: #ff2d95;
+  /* Palette tokens — mirror Tailwind config (navy blue brand) */
+  --obsidian: #04091a;
+  --obsidian-deep: #020612;
+  --neon-cyan: #1D6AFF;
+  --neon-violet: #2B5CE8;
+  --neon-magenta: #E0EEFF;
 
   /* Cursor-tracked gradient */
   --mx: 50%;
@@ -36,7 +36,7 @@ html {
 body {
   font-family: var(--font-satoshi);
   background: var(--obsidian);
-  color: #e6e6ef;
+  color: #e8eeff;
   overflow-x: hidden;
   cursor: none; /* Custom cursor takes over — hidden on touch devices via media query */
 }
@@ -51,8 +51,8 @@ body {
    SELECTION — cyan highlight matches brand
 ----------------------------------------------------------------- */
 ::selection {
-  background: var(--neon-cyan);
-  color: var(--obsidian-deep);
+  background: #1D6AFF;
+  color: #ffffff;
 }
 
 /* -----------------------------------------------------------------
@@ -66,7 +66,7 @@ body {
   background: var(--obsidian-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-violet));
+  background: linear-gradient(180deg, #1D6AFF, #2B5CE8);
   border-radius: 8px;
 }
 
@@ -104,15 +104,15 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* Neon gradient text — animated shimmer */
+  /* Brand blue gradient text — animated shimmer */
   .text-neon {
     background: linear-gradient(
       110deg,
-      #00e5ff 0%,
-      #66f0ff 20%,
-      #c084fc 50%,
-      #8b5cf6 80%,
-      #00e5ff 100%
+      #1D6AFF 0%,
+      #4D8FFF 25%,
+      #7AACFF 50%,
+      #4D8FFF 75%,
+      #1D6AFF 100%
     );
     background-size: 200% 100%;
     -webkit-background-clip: text;

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { NAV_LINKS, SITE, SOCIAL } from "@/lib/constants";
 
@@ -8,9 +9,18 @@ export function Footer() {
         {/* Top meta row */}
         <div className="flex flex-col gap-10 border-b border-white/5 pb-16 md:flex-row md:justify-between">
           <div className="max-w-sm">
-            <div className="font-display text-2xl text-white">
-              {SITE.name}
-              <span className="text-neon-cyan">.</span>
+            <div className="flex items-center gap-2.5">
+              <Image
+                src="/scriptive logo.png"
+                alt={SITE.name}
+                width={36}
+                height={36}
+                className="h-9 w-auto"
+              />
+              <span className="font-display text-2xl text-white">
+                {SITE.name}
+                <span className="text-neon-cyan">.</span>
+              </span>
             </div>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
               {SITE.description}

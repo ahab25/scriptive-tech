@@ -1,47 +1,27 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "./MagneticButton";
 
-const LOGO_WORD = "Scriptive";
-
 function LogoMark() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      const interval = setInterval(() => {
-        setCount((c) => {
-          if (c >= LOGO_WORD.length) {
-            clearInterval(interval);
-            return c;
-          }
-          return c + 1;
-        });
-      }, 70);
-      return () => clearInterval(interval);
-    }, 2000);
-    return () => clearTimeout(delay);
-  }, []);
-
-  const done = count === LOGO_WORD.length;
-
   return (
-    <span className="font-mono tracking-tight">
-      <span className="text-neon-cyan/70">&lt;/</span>
-      <span className="text-white">{LOGO_WORD.slice(0, count)}</span>
-      {done && <span className="text-neon-cyan/70">&gt;</span>}
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.55, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-        className="ml-px inline-block text-neon-cyan"
-      >
-        _
-      </motion.span>
+    <span className="flex items-center gap-2.5">
+      <Image
+        src="/scriptive logo.png"
+        alt={SITE.name}
+        width={36}
+        height={36}
+        className="h-9 w-auto"
+        priority
+      />
+      <span className="font-display text-[17px] tracking-[-0.02em] text-white">
+        SCRIPTIVE
+      </span>
     </span>
   );
 }
@@ -63,14 +43,13 @@ export function Navigation() {
         transition={{ duration: 1, delay: 2, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "fixed left-0 right-0 top-0 z-50 transition-[padding,background-color,backdrop-filter] duration-500",
-          scrolled ? "py-3 backdrop-blur-xl bg-obsidian-1000/60 border-b border-white/5" : "py-6",
+          scrolled ? "py-3 backdrop-blur-xl bg-obsidian-1000/70 border-b border-white/5" : "py-6",
         )}
       >
         <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 lg:px-10">
           <Link
             href="/"
             data-cursor="hover"
-            className="text-xl"
             aria-label={`${SITE.name} home`}
           >
             <LogoMark />
@@ -148,6 +127,15 @@ export function Navigation() {
             </Link>
           </motion.div>
         ))}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={menuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: menuOpen ? 0.1 + NAV_LINKS.length * 0.06 : 0, duration: 0.5 }}
+        >
+          <Link href="/#contact" onClick={() => setMenuOpen(false)}>
+            <MagneticButton size="md">Start a project →</MagneticButton>
+          </Link>
+        </motion.div>
       </motion.div>
     </>
   );

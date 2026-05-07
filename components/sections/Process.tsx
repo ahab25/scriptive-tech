@@ -21,7 +21,7 @@ export function Process() {
           {/* Sticky header */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
-              <SectionLabel index="06">How we work</SectionLabel>
+              <SectionLabel index="05">How we work</SectionLabel>
               <RevealText
                 as="h2"
                 className="mt-8 font-display text-display-sm text-white text-balance"
@@ -43,12 +43,12 @@ export function Process() {
             {PROCESS_STEPS.map((step, i) => (
               <motion.li
                 key={step.index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-15%" }}
                 transition={{
                   duration: 0.9,
-                  delay: i * 0.05,
+                  delay: i * 0.07,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="relative flex gap-6 py-10 first:pt-0 last:pb-0 md:gap-10"

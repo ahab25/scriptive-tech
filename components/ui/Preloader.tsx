@@ -1,18 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
-/**
- * A tight pre-load sequence:
- *   1. SCRIPTIVE mark fades in
- *   2. Counter ticks 00 → 100
- *   3. A horizontal line sweeps across
- *   4. Panels split and reveal the site
- *
- * We don't block on real asset loading — that would feel inconsistent
- * depending on cache. Instead we give every visitor a tight 1.8s ritual.
- */
 export function Preloader() {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -24,7 +15,6 @@ export function Preloader() {
     let raf = 0;
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
-      // Ease-out for a natural deceleration at the end
       const eased = 1 - Math.pow(1 - t, 3);
       setProgress(Math.round(eased * 100));
       if (t < 1) raf = requestAnimationFrame(tick);
@@ -32,7 +22,6 @@ export function Preloader() {
     };
     raf = requestAnimationFrame(tick);
 
-    // Lock scroll during preload
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -65,31 +54,45 @@ export function Preloader() {
             transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
           />
 
-          <div className="relative z-10 flex flex-col items-center gap-10 px-8">
+          <div className="relative z-10 flex flex-col items-center gap-8 px-8">
+            {/* Logo mark */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl tracking-[-0.03em] text-white sm:text-6xl"
+              initial={{ opacity: 0, scale: 0.8, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-center gap-4"
             >
-              SCRIPTIVE
+              <Image
+                src="/scriptive logo.png"
+                alt="Scriptive"
+                width={160}
+                height={160}
+                priority
+                className="h-40 w-auto"
+              />
             </motion.div>
 
-            <div className="flex w-[min(80vw,420px)] items-center gap-4">
-              <div className="font-mono text-xs text-white/60">
+            {/* Progress bar */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="flex w-[min(80vw,380px)] items-center gap-4"
+            >
+              <div className="font-mono text-xs text-white/50">
                 {String(progress).padStart(3, "0")}
               </div>
               <div className="relative h-px flex-1 overflow-hidden bg-white/10">
                 <motion.div
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-magenta"
+                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-cyan2"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="font-mono text-xs text-white/60">100</div>
-            </div>
+              <div className="font-mono text-xs text-white/50">100</div>
+            </motion.div>
 
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-              Compiling experience…
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
+              Loading experience…
             </div>
           </div>
         </motion.div>

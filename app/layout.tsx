@@ -23,16 +23,16 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0a0a0f" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
+    { media: "(prefers-color-scheme: light)", color: "#04091a" },
+    { media: "(prefers-color-scheme: dark)", color: "#04091a" },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s · ${SITE.name}`,
+    default: "Scriptive",
+    template: `%s · Scriptive`,
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -100,7 +100,7 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={jetbrains.variable}>
-      <body className="bg-obsidian-950 text-white antialiased">
+      <body className="bg-obsidian-975 text-white antialiased">
         {/* JSON-LD: Organization — helps Google rich results */}
         <script
           type="application/ld+json"

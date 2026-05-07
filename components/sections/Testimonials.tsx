@@ -28,7 +28,7 @@ export function Testimonials() {
       onPointerLeave={() => setPaused(false)}
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel index="07">Words from collaborators</SectionLabel>
+        <SectionLabel index="06">Words from collaborators</SectionLabel>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">

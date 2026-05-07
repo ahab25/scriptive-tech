@@ -10,22 +10,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Obsidian base — not pure black; has a faint blue undertone
+        // Deep navy base — matches brand identity (dark navy, not pure black)
         obsidian: {
-          50: "#f5f6fa",
-          900: "#0f1018",
-          950: "#0a0a0f",
-          975: "#06060a",
-          1000: "#000004",
+          50: "#f0f5ff",
+          900: "#0b1229",
+          950: "#070d1e",
+          975: "#04091a",
+          1000: "#020612",
         },
-        // Neon accent system
+        // Brand blue accent system
         neon: {
-          cyan: "#00e5ff",
-          cyan2: "#66f0ff",
-          violet: "#8b5cf6",
-          violet2: "#c084fc",
-          magenta: "#ff2d95",
-          lime: "#b6ff4f",
+          cyan: "#1D6AFF",    // Primary brand blue
+          cyan2: "#4D8FFF",   // Lighter blue
+          violet: "#2B5CE8",  // Deep blue variant
+          violet2: "#7AACFF", // Soft blue
+          magenta: "#E0EEFF", // Ice blue-white (replaces magenta)
+          lime: "#BDD5FF",    // Pale blue (replaces lime)
         },
         glass: {
           white: "rgba(255,255,255,0.06)",
@@ -85,11 +85,11 @@ const config: Config = {
         "grid-fade":
           "linear-gradient(to bottom, rgba(10,10,15,0) 0%, rgba(10,10,15,1) 100%)",
         "radial-glow":
-          "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(0,229,255,0.08), transparent 60%)",
+          "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(29,106,255,0.10), transparent 60%)",
       },
       boxShadow: {
-        "neon-cyan": "0 0 40px -10px rgba(0,229,255,0.6), 0 0 80px -20px rgba(0,229,255,0.3)",
-        "neon-violet": "0 0 40px -10px rgba(139,92,246,0.6), 0 0 80px -20px rgba(139,92,246,0.3)",
+        "neon-cyan": "0 0 40px -10px rgba(29,106,255,0.6), 0 0 80px -20px rgba(29,106,255,0.3)",
+        "neon-violet": "0 0 40px -10px rgba(43,92,232,0.6), 0 0 80px -20px rgba(43,92,232,0.3)",
         "glass": "inset 0 1px 0 0 rgba(255,255,255,0.08), 0 10px 40px -10px rgba(0,0,0,0.5)",
       },
     },

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { RevealText } from "../ui/RevealText";
@@ -53,6 +53,13 @@ const AWARDS = [
 ];
 
 export function About() {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"],
+  });
+  const galleryY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
+
   return (
     <section id="about" className="relative py-32 lg:py-48">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -105,11 +112,13 @@ export function About() {
 
         {/* Studio gallery */}
         <motion.div
+          ref={galleryRef}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="mt-16"
+          style={{ y: galleryY }}
         >
           <div className="mb-4 flex items-center gap-3">
             <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />

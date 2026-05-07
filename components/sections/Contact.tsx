@@ -96,7 +96,7 @@ export function Contact() {
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionLabel index="08">Let's build something</SectionLabel>
+            <SectionLabel index="07">Let's build something</SectionLabel>
             <RevealText
               as="h2"
               className="mt-8 font-display text-display-md text-white text-balance"
@@ -133,7 +133,7 @@ export function Contact() {
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
                     Studio
                   </span>
-                  <span className="text-white">Karachi · Islamabad, Pakistan &amp; California, USA</span>
+                  <span className="text-white">UAE · Pakistan · USA</span>
                 </div>
               </div>
             </div>
