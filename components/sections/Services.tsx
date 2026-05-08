@@ -31,7 +31,7 @@ export function Services() {
                 as="h2"
                 className="mt-8 font-display text-display-md text-white text-balance"
               >
-                Twelve disciplines. One opinionated studio.
+                We don't do everything. We do the right things — obsessively well.
               </RevealText>
             </div>
 
