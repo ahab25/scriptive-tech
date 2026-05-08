@@ -275,105 +275,191 @@ export const TESTIMONIALS = [
   },
 ] as const;
 
+export type ProjectPhase = {
+  phase: string;
+  title: string;
+  description: string;
+  duration: string;
+  deliverables: readonly string[];
+};
+
 export type PortfolioItem = {
   slug: string;
   title: string;
   category: string;
   year: string;
+  location: string;
   color: string;
   image: string;
   images: readonly string[];
+  liveUrl: string;
+  overview: string;
+  challenge: string;
+  solution: string;
+  outcome: string;
+  metrics: readonly { value: string; label: string }[];
+  phases: readonly ProjectPhase[];
 };
 
 export const PORTFOLIO: readonly PortfolioItem[] = [
   {
-    slug: "helix-finance",
-    title: "Helix Finance",
-    category: "Web · Brand · 3D",
-    year: "2025",
-    color: "from-neon-cyan/20 to-neon-violet/20",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    slug: "bella-noor-skincare",
+    title: "Bella Noor Skincare",
+    category: "E-commerce · Brand Identity",
+    year: "2024",
+    location: "USA",
+    color: "from-neon-magenta/30 to-neon-cyan/20",
+    liveUrl: "https://bellanoorskincare.com/",
+    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1400&q=80",
     images: [
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=80",
+    ],
+    overview: "Bella Noor Skincare is a luxury skincare brand targeting the US market with a range of clean, ingredient-led formulations. They came to us needing an e-commerce presence that matched the premium quality of their products — one that could convert first-time visitors into loyal subscribers.",
+    challenge: "The brand had beautiful products but a basic Shopify theme that undercut their premium positioning. Cart abandonment was high, product pages weren't communicating ingredient stories effectively, and there was no subscription offering — a critical missed revenue stream.",
+    solution: "We rebuilt the storefront from scratch with custom Shopify sections, a rich ingredient storytelling layer on product pages, a subscription and bundle model powered by Recharge, and a streamlined express checkout flow. Brand identity was refreshed with refined typography and a warmer colour palette.",
+    outcome: "Conversion rate improved 41% in the first 60 days. Average order value rose 28% after bundling was introduced. Subscription signups went from zero to 200+ in the first six weeks. The brand is now expanding into two new retail channels.",
+    metrics: [
+      { value: "41%", label: "Conversion lift" },
+      { value: "28%", label: "Higher AOV" },
+      { value: "200+", label: "Subscribers in 6wks" },
+    ],
+    phases: [
+      { phase: "01", title: "Discovery", duration: "Week 1–2", description: "Brand audit, competitor analysis, and customer journey mapping. We interviewed the founder and reviewed purchase data to identify the biggest conversion leaks.", deliverables: ["Brand & competitor audit", "Customer journey map", "Conversion gap analysis", "Project brief & KPIs"] },
+      { phase: "02", title: "Brand Refinement", duration: "Week 2–3", description: "Refined the visual identity — typography, colour palette, photography art direction, and tone of voice — to communicate premium quality consistently across every touchpoint.", deliverables: ["Updated brand guidelines", "Typography & colour system", "Photography brief", "Tone of voice document"] },
+      { phase: "03", title: "UX & Design", duration: "Week 3–5", description: "Designed all key pages in Figma: homepage, PDP, collection, cart, and checkout. Interactive prototype tested with 6 real customers before development began.", deliverables: ["Wireframes (all key pages)", "High-fidelity Figma designs", "Interactive prototype", "Usability test report"] },
+      { phase: "04", title: "Shopify Development", duration: "Week 5–8", description: "Custom Shopify theme built from scratch. Integrated Recharge for subscriptions, Klaviyo for lifecycle email, and Algolia for search. All sections are editable by the client.", deliverables: ["Custom Shopify theme", "Recharge subscription setup", "Klaviyo email flows", "CMS training & documentation"] },
+      { phase: "05", title: "QA & Launch", duration: "Week 8–9", description: "Full QA pass across 12 devices, checkout flow stress testing, Core Web Vitals audit, and SEO meta review. Launched with a coordinated email and social campaign.", deliverables: ["Cross-device QA report", "Performance audit (CWV)", "Launch checklist", "Go-live support"] },
+    ],
+  },
+  {
+    slug: "burga",
+    title: "Burga",
+    category: "E-commerce · Headless · Web",
+    year: "2024",
+    location: "Turkey",
+    color: "from-neon-violet/30 to-neon-magenta/20",
+    liveUrl: "https://burga.com/",
+    image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1200&q=80",
+    ],
+    overview: "Burga is one of Europe's fastest-growing premium phone case and accessories brands, operating from Turkey with a global customer base. We were brought in to architect a headless e-commerce rebuild capable of handling their massive product catalogue and high-traffic drop events without performance degradation.",
+    challenge: "The existing Shopify theme couldn't handle the variant complexity — hundreds of phone models cross-referenced with dozens of designs — without degrading page performance. During drop events, load times spiked above 4 seconds, directly costing conversions. International expansion to 12 markets added further complexity.",
+    solution: "We architected a Shopify Hydrogen headless storefront with edge-deployed product pages, a custom variant selector built for performance, and a CDN-backed image pipeline optimised for the product catalogue. A server-side rendering strategy kept all pages fast even under peak load.",
+    outcome: "Page load time reduced from 4.2s to 1.1s. Drop events now handled without performance degradation. The Hydrogen architecture supports 12 international markets with localised pricing and content. Core Web Vitals score hit 98.",
+    metrics: [
+      { value: "1.1s", label: "Avg page load" },
+      { value: "12", label: "Markets served" },
+      { value: "98", label: "CWV score" },
+    ],
+    phases: [
+      { phase: "01", title: "Technical Discovery", duration: "Week 1–2", description: "Deep-dive into existing Shopify architecture, traffic patterns, and bottlenecks. Load-tested the current theme to identify exactly where performance broke down during high-traffic events.", deliverables: ["Performance audit report", "Architecture review", "Traffic & bottleneck analysis", "Headless migration plan"] },
+      { phase: "02", title: "Architecture Design", duration: "Week 2–4", description: "Designed the headless Hydrogen architecture: edge deployment strategy, data fetching layer, image CDN pipeline, and variant selector performance model. API contracts defined before any UI work began.", deliverables: ["Technical architecture doc", "API contract definitions", "CDN & image pipeline spec", "Variant model design"] },
+      { phase: "03", title: "UI & Component System", duration: "Week 4–6", description: "Built a lean React component library in Figma first, then code. Every component was performance-budgeted before implementation. The design system supports all 12 market locales.", deliverables: ["Figma component library", "Design tokens (per locale)", "Responsive layout specs", "Motion & interaction guide"] },
+      { phase: "04", title: "Hydrogen Development", duration: "Week 6–10", description: "Full Hydrogen build: storefront, product pages, variant selector, cart, checkout, and admin integration. Edge deployment configured for all 12 regional domains with localised pricing.", deliverables: ["Shopify Hydrogen storefront", "Custom variant selector", "Edge deployment config", "Localisation setup (12 markets)"] },
+      { phase: "05", title: "Load Testing & Launch", duration: "Week 10–12", description: "Simulated drop-event traffic at 10× normal load. Tuned caching strategies and CDN rules until performance held under pressure. Phased rollout to all markets over 48 hours.", deliverables: ["Load test reports (3 rounds)", "Cache & CDN configuration", "Phased rollout plan", "Post-launch monitoring setup"] },
+    ],
+  },
+  {
+    slug: "tikl",
+    title: "Tikl.io",
+    category: "SaaS · UI/UX · Web App",
+    year: "2024",
+    location: "Europe",
+    color: "from-neon-cyan/30 to-neon-violet/20",
+    liveUrl: "https://www.tikl.io/",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    ],
+    overview: "Tikl is a European SaaS platform connecting service professionals — plumbers, electricians, cleaners — with customers who need reliable on-demand help. They needed a complete product redesign and a marketing site that could convert curious visitors into active platform users across multiple European markets.",
+    challenge: "The existing app was functional but confusing — a low activation rate suggested users were getting lost before reaching their first successful booking. The marketing site had strong traffic but poor conversion, suggesting the value proposition wasn't landing clearly enough.",
+    solution: "We ran a three-week discovery sprint: user interviews with both service providers and customers, activation funnel analysis, and competitive benchmarking. The full app interface was redesigned with a focus on the onboarding flow. The marketing site was rebuilt with a clear narrative that separated the two user types from the first scroll.",
+    outcome: "User activation rate improved 52% in the first month. Marketing site trial signups up 67%. Time-to-first-booking reduced from 8 minutes to under 3. The redesigned onboarding became a template for their expansion into 3 new markets.",
+    metrics: [
+      { value: "52%", label: "Activation lift" },
+      { value: "67%", label: "More trial signups" },
+      { value: "3min", label: "Time to first booking" },
+    ],
+    phases: [
+      { phase: "01", title: "User Research", duration: "Week 1–3", description: "Conducted 14 user interviews split between service providers and customers. Mapped both journeys end-to-end, identified the activation drop-off point, and ran a heuristic evaluation of the existing app.", deliverables: ["Interview transcripts & synthesis", "Dual journey maps", "Activation funnel analysis", "Heuristic evaluation report"] },
+      { phase: "02", title: "Information Architecture", duration: "Week 3–4", description: "Redesigned the IA to separate the two user types clearly from login. Card sorting sessions with 20 users helped validate the new navigation structure before any visual design began.", deliverables: ["Revised IA & sitemap", "Card sorting results", "Navigation model", "Content hierarchy doc"] },
+      { phase: "03", title: "Design & Prototype", duration: "Week 4–7", description: "High-fidelity designs for all key screens: onboarding, search/match, booking, profiles, and the provider dashboard. Clickable prototype tested in two rounds with real users.", deliverables: ["Full Figma design system", "High-fidelity screen designs", "Clickable prototype", "Two rounds of usability testing"] },
+      { phase: "04", title: "Marketing Site", duration: "Week 7–9", description: "Next.js marketing site built with a dual-audience narrative — one path for customers, one for service providers. Animated illustrations built in Lottie. Multi-language support for 3 markets.", deliverables: ["Next.js marketing site", "Dual-audience narrative", "Lottie animations", "i18n for 3 languages"] },
+      { phase: "05", title: "App Development", duration: "Week 9–13", description: "Full front-end implementation of the redesigned app. React Native for mobile, aligned with the web design system. New onboarding flow with contextual tooltips and progress indicators.", deliverables: ["React Native app (iOS & Android)", "Onboarding flow implementation", "Design system in code", "QA & accessibility audit"] },
     ],
   },
   {
-    slug: "orbit-labs",
-    title: "Orbit Labs",
-    category: "Mobile · AI",
+    slug: "stellaswap",
+    title: "StellaSwap",
+    category: "DeFi · Web3 · UI/UX",
+    year: "2024",
+    location: "USA",
+    color: "from-neon-violet/40 to-neon-cyan/20",
+    liveUrl: "https://stellaswap.com/",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1644088379091-d574269d422f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80",
+    ],
+    overview: "StellaSwap is the leading DEX and DeFi hub on the Moonbeam network, offering token swaps, liquidity pools, yield farming, and cross-chain bridging. We were engaged to deliver a comprehensive platform redesign that brought institutional-grade UX to a complex DeFi product.",
+    challenge: "The original interface was built quickly to meet market demand — inconsistent components, confusing swap and liquidity flows, and no design system to scale from. The challenge was making genuinely complex DeFi mechanics feel simple without dumbing them down for experienced users.",
+    solution: "We built a complete design system in Figma, establishing tokens, components, and interaction patterns for every surface. The swap interface was redesigned with progressive disclosure — casual users see a clean one-screen flow, while power users can access advanced routing and slippage controls. Animated micro-interactions guide users through multi-step processes.",
+    outcome: "Total Value Locked increased 340% in the quarter following launch. Daily active users up 180%. The design system now powers three sub-products. StellaSwap became a reference DeFi UI cited by multiple protocol teams.",
+    metrics: [
+      { value: "340%", label: "TVL growth" },
+      { value: "180%", label: "DAU increase" },
+      { value: "3", label: "Products powered" },
+    ],
+    phases: [
+      { phase: "01", title: "Protocol Research", duration: "Week 1–2", description: "Deep-dive into the Moonbeam ecosystem, StellaSwap's smart contract architecture, and competitive DeFi UIs. Interviewed power users to understand the mental models behind liquidity provision and yield strategies.", deliverables: ["Protocol architecture review", "Competitive DeFi UI audit", "Power user interviews (8)", "UX opportunity map"] },
+      { phase: "02", title: "Design System Foundation", duration: "Week 2–5", description: "Built the design system foundation in Figma: colour tokens, typography scale, spacing system, icon library, and the base component set. Web3-specific components (wallet connectors, transaction states, gas indicators) designed from scratch.", deliverables: ["Design token system", "Base component library", "Web3 UI component set", "Dark mode specifications"] },
+      { phase: "03", title: "Core Flows", duration: "Week 5–8", description: "Designed all primary user flows: swap, liquidity provision, yield farming, bridging, and portfolio view. Progressive disclosure model tested with both novice and expert users.", deliverables: ["Swap interface redesign", "Liquidity pool flows", "Yield farming dashboard", "Bridge interface", "Portfolio view"] },
+      { phase: "04", title: "Front-End Implementation", duration: "Week 8–13", description: "Full React implementation against the Figma design system. Animated micro-interactions with Framer Motion. Real-time data from on-chain sources with optimistic UI patterns for transaction states.", deliverables: ["React implementation", "Framer Motion animations", "Real-time data integration", "Transaction state system"] },
+      { phase: "05", title: "Audit & Launch", duration: "Week 13–14", description: "Accessibility audit, security review of the front-end (no smart contracts modified), cross-browser QA, and a coordinated launch with the StellaSwap community. Post-launch analytics dashboards set up to track key UX metrics.", deliverables: ["Accessibility audit", "Front-end security review", "Community launch campaign", "Analytics & UX metrics setup"] },
+    ],
+  },
+  {
+    slug: "deluxe-holidays",
+    title: "Deluxe Holidays",
+    category: "Web Design · Brand · Travel",
     year: "2025",
-    color: "from-neon-violet/20 to-neon-magenta/20",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80",
+    location: "Pakistan",
+    color: "from-neon-lime/30 to-neon-cyan/20",
+    liveUrl: "https://deluxeholidays.com/",
+    image: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1400&q=80",
     images: [
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80",
     ],
-  },
-  {
-    slug: "northbeam",
-    title: "Northbeam",
-    category: "Web · Motion",
-    year: "2024",
-    color: "from-neon-magenta/20 to-neon-cyan/20",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+    overview: "Deluxe Holidays is a premium travel agency in Pakistan offering curated domestic and international holiday packages. With a loyal offline client base but no meaningful digital presence, they needed a brand and website that could capture the online travel market — mobile-first, booking-ready, and aspirational.",
+    challenge: "The previous website was outdated, not mobile-responsive, and had no online booking or enquiry capability. The brand felt generic in a market where trust and aspiration drive purchase decisions. The agency was losing younger customers to competitors with polished digital experiences.",
+    solution: "We developed a full brand identity — logo, colour palette, typography, and photography style — then built a Next.js website with destination-first navigation, a curated package showcase, and a streamlined enquiry flow. WhatsApp integration for instant enquiries matched how Pakistani travellers naturally communicate.",
+    outcome: "Online enquiries tripled within two months of launch. Mobile sessions now account for 71% of all traffic. Bounce rate dropped from 68% to 29%. The agency onboarded a dedicated digital team six months after launch to manage the incoming volume.",
+    metrics: [
+      { value: "3×", label: "Online enquiries" },
+      { value: "71%", label: "Mobile traffic" },
+      { value: "29%", label: "Bounce rate" },
     ],
-  },
-  {
-    slug: "mercato",
-    title: "Mercato",
-    category: "E-commerce · Brand",
-    year: "2024",
-    color: "from-neon-lime/20 to-neon-cyan/20",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=80",
-    ],
-  },
-  {
-    slug: "koen-studio",
-    title: "Kōen Studio",
-    category: "Identity · Site",
-    year: "2024",
-    color: "from-neon-cyan/20 to-neon-lime/20",
-    image:
-      "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1400&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1626785774625-0b1c2c4eab67?auto=format&fit=crop&w=1200&q=80",
-    ],
-  },
-  {
-    slug: "finchley",
-    title: "Finchley Labs",
-    category: "SaaS · Design System",
-    year: "2023",
-    color: "from-neon-violet/20 to-neon-cyan/20",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+    phases: [
+      { phase: "01", title: "Discovery & Brand Brief", duration: "Week 1–2", description: "Stakeholder workshops to understand the agency's positioning, target customers, and competitive landscape. Defined the brand personality and the digital strategy before touching any visuals.", deliverables: ["Brand positioning brief", "Target audience personas", "Competitive landscape map", "Digital strategy document"] },
+      { phase: "02", title: "Brand Identity", duration: "Week 2–4", description: "Created the full brand identity: logotype, colour system, typography, and photography style guide. The identity needed to feel premium and trustworthy — a step above generic travel branding.", deliverables: ["Logo & logotype system", "Colour palette & usage", "Typography selection", "Photography style guide"] },
+      { phase: "03", title: "UX & Content Strategy", duration: "Week 4–5", description: "Mapped the information architecture around destination discovery, package browsing, and enquiry conversion. Content strategy defined to support both organic search and direct navigation.", deliverables: ["Sitemap & IA", "Content strategy", "SEO keyword framework", "Wireframes (mobile-first)"] },
+      { phase: "04", title: "Design & Prototyping", duration: "Week 5–7", description: "High-fidelity designs for all key pages built mobile-first. Package cards, destination heroes, and the enquiry flow were all validated with real potential customers in Karachi and Lahore.", deliverables: ["Mobile-first Figma designs", "Interactive prototype", "User testing (8 participants)", "Design refinements"] },
+      { phase: "05", title: "Development & Launch", duration: "Week 7–10", description: "Next.js website built with a headless CMS so the agency team can manage packages independently. WhatsApp enquiry integration, Google Maps embeds for destinations, and full SEO optimisation on launch.", deliverables: ["Next.js website", "CMS setup & training", "WhatsApp enquiry integration", "Launch SEO optimisation"] },
     ],
   },
 ] as const;
