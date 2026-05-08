@@ -57,7 +57,7 @@ export function ServiceModal({ service, onClose }: Props) {
     <AnimatePresence>
       {service && (
         <motion.div
-          className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:p-6"
+          className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:p-6 lg:p-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -75,22 +75,22 @@ export function ServiceModal({ service, onClose }: Props) {
             role="dialog"
             aria-modal="true"
             aria-label={service.title}
-            className="relative w-full max-h-[92dvh] overflow-hidden rounded-t-3xl border border-white/10 bg-obsidian-950 shadow-2xl sm:max-w-2xl sm:rounded-3xl"
+            className="relative flex w-full flex-col max-h-[92dvh] rounded-t-3xl border border-white/10 bg-obsidian-950 shadow-2xl sm:max-w-2xl sm:rounded-3xl lg:max-w-4xl"
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Corner glow */}
-            <div aria-hidden className={cn("pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br blur-3xl opacity-40", ACCENT_GLOW[service.accent])} />
+            <div aria-hidden className={cn("pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-gradient-to-br blur-3xl opacity-40", ACCENT_GLOW[service.accent])} />
 
             {/* Drag handle — mobile only */}
-            <div className="flex justify-center pt-3 sm:hidden">
+            <div className="flex shrink-0 justify-center pt-3 sm:hidden">
               <div className="h-1 w-10 rounded-full bg-white/20" />
             </div>
 
             {/* Sticky header */}
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-obsidian-950/95 px-6 pb-4 pt-5 backdrop-blur-sm sm:px-8 sm:pt-8">
+            <div className="shrink-0 flex items-start justify-between gap-4 bg-obsidian-950/95 px-6 pb-4 pt-5 backdrop-blur-sm sm:px-8 sm:pt-8">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2.5">
                   <span className={cn("h-2 w-2 shrink-0 rounded-full", ACCENT_DOT[service.accent])} />
@@ -115,46 +115,51 @@ export function ServiceModal({ service, onClose }: Props) {
             </div>
 
             {/* Accent divider */}
-            <div className={cn("mx-6 h-px sm:mx-8", ACCENT_DIVIDER[service.accent])} style={{ opacity: 0.2 }} />
+            <div className={cn("shrink-0 mx-6 h-px sm:mx-8", ACCENT_DIVIDER[service.accent])} style={{ opacity: 0.2 }} />
 
             {/* Scrollable body */}
-            <div className="overflow-y-auto overscroll-contain px-6 pb-8 pt-6 sm:px-8 max-h-[calc(92dvh-120px)]">
+            <div className="flex-1 overflow-y-auto overscroll-contain px-6 pb-8 pt-6 sm:px-8">
 
-              {/* Description */}
-              <p className="text-[15px] leading-relaxed text-white/70">
-                {service.detail.description}
-              </p>
+              {/* Two-column layout on desktop */}
+              <div className="lg:grid lg:grid-cols-2 lg:gap-10">
 
-              {/* Deliverables */}
-              <div className="mt-8">
-                <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
-                  What you'll receive
+                {/* Left column: description + tech */}
+                <div className="flex flex-col gap-8">
+                  <p className="text-[15px] leading-relaxed text-white/70">
+                    {service.detail.description}
+                  </p>
+
+                  <div>
+                    <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+                      Tools & tech
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {service.detail.tech.map((t) => (
+                        <span key={t} className={cn("rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em]", ACCENT_BG[service.accent])}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <ul className="grid gap-2.5 sm:grid-cols-2">
-                  {service.detail.deliverables.map((d) => (
-                    <li key={d} className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
-                      <span className={cn("mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full", ACCENT_DOT[service.accent])} />
-                      <span className="text-sm leading-relaxed text-white/80">{d}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                {/* Right column: deliverables */}
+                <div className="mt-8 lg:mt-0">
+                  <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+                    What you'll receive
+                  </div>
+                  <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
+                    {service.detail.deliverables.map((d) => (
+                      <li key={d} className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
+                        <span className={cn("mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full", ACCENT_DOT[service.accent])} />
+                        <span className="text-sm leading-relaxed text-white/80">{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              {/* Tech stack */}
-              <div className="mt-8">
-                <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
-                  Tools & tech
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {service.detail.tech.map((t) => (
-                    <span key={t} className={cn("rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em]", ACCENT_BG[service.accent])}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA */}
+              {/* CTA — full width */}
               <div className="mt-8 flex flex-col gap-3 rounded-2xl border border-white/5 bg-white/[0.02] p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-display text-base text-white">Ready to get started?</p>
