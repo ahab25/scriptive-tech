@@ -55,14 +55,15 @@ export function Services() {
             {SERVICES.map((service, i) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                initial={{ opacity: 0, y: 48, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-8%" }}
+                viewport={{ once: true, margin: "-6%" }}
                 transition={{
-                  duration: 0.9,
-                  delay: (i % 3) * 0.1,
+                  duration: 0.85,
+                  delay: (i % 3) * 0.12,
                   ease: [0.22, 1, 0.36, 1],
                 }}
+                className="h-full"
               >
                 <ServiceCard
                   service={service}
