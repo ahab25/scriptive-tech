@@ -133,7 +133,7 @@ export function FAQ() {
           <span className="inline-block rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neon-cyan">
             Got questions?
           </span>
-          <h2 className="mt-6 font-display text-4xl text-white tracking-[-0.03em] md:text-5xl lg:text-6xl">
+          <h2 className="mt-6 font-display text-3xl text-white tracking-[-0.03em] sm:text-4xl md:text-5xl lg:text-6xl">
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-white/50 leading-relaxed">

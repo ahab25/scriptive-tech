@@ -112,7 +112,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-44 right-6 z-50 flex w-[min(360px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-obsidian-1000/95 shadow-2xl backdrop-blur-xl"
+            className="fixed bottom-44 right-6 z-50 flex w-[min(360px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-obsidian-1000/95 shadow-2xl backdrop-blur-xl max-h-[min(520px,70dvh)]"
           >
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-white/5 px-4 py-3">
@@ -129,7 +129,7 @@ export function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex h-72 flex-col gap-3 overflow-y-auto p-4">
+            <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
               {messages.length === 0 && (
                 <div className="flex flex-col gap-3">
                   <p className="text-sm text-white/70">

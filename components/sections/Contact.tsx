@@ -163,7 +163,7 @@ export function Contact() {
                 </div>
               ) : (
                 <form onSubmit={onSubmit} className="space-y-8">
-                  <div className="grid gap-6 md:grid-cols-2">
+                  <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                     <Field label="Name" name="name" placeholder="Ada Lovelace" required />
                     <Field label="Email" name="email" type="email" placeholder="ada@studio.com" required />
                   </div>
@@ -184,7 +184,7 @@ export function Contact() {
                             onClick={() => toggle(opt)}
                             aria-pressed={active}
                             className={cn(
-                              "focus-ring rounded-full border px-4 py-2 text-sm transition-all",
+                              "focus-ring rounded-full border px-4 py-2.5 text-sm transition-all",
                               active
                                 ? "border-neon-cyan bg-neon-cyan/10 text-neon-cyan"
                                 : "border-white/15 text-white/70 hover:border-white/35 hover:text-white",
@@ -211,7 +211,7 @@ export function Contact() {
                           aria-pressed={budget === b}
                           onClick={() => setBudget((cur) => (cur === b ? null : b))}
                           className={cn(
-                            "focus-ring rounded-full border px-4 py-2 text-sm transition-all",
+                            "focus-ring rounded-full border px-4 py-2.5 text-sm transition-all",
                             budget === b
                               ? "border-neon-violet bg-neon-violet/10 text-neon-violet2"
                               : "border-white/15 text-white/70 hover:border-white/35 hover:text-white",

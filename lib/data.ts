@@ -374,7 +374,7 @@ export const PORTFOLIO: readonly PortfolioItem[] = [
     location: "Europe",
     color: "from-neon-cyan/30 to-neon-violet/20",
     liveUrl: "https://www.tikl.io/",
-    image: "/images/Project/Tikl.png",
+    image: "/images/Project/tikl.png",
     images: [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",

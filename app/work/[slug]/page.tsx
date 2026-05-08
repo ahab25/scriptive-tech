@@ -123,11 +123,11 @@ function NextProject({ current }: { current: string }) {
     <section className="border-t border-white/5 bg-obsidian-975">
       <Link
         href={`/work/${next.slug}`}
-        className="group mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-20 lg:px-10"
+        className="group mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-6 py-14 sm:gap-6 sm:py-20 lg:px-10"
       >
         <div>
           <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">Next project</div>
-          <h2 className="mt-3 font-display text-4xl text-white transition-colors group-hover:text-neon-cyan md:text-6xl">
+          <h2 className="mt-3 font-display text-2xl text-white transition-colors group-hover:text-neon-cyan sm:text-4xl md:text-6xl">
             {next.title}
           </h2>
           <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">{next.category}</div>
@@ -174,7 +174,7 @@ export default function CaseStudyPage() {
               </span>
             </div>
 
-            <h1 className="font-display text-5xl text-white tracking-[-0.03em] md:text-7xl lg:text-8xl">
+            <h1 className="font-display text-4xl text-white tracking-[-0.03em] sm:text-5xl md:text-7xl lg:text-8xl">
               {project.title}
             </h1>
 
@@ -204,7 +204,7 @@ export default function CaseStudyPage() {
 
         {/* Metrics bar */}
         <div className="border-y border-white/5 bg-obsidian-975">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-3 divide-x divide-white/5 px-6 lg:px-10">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-1 divide-y divide-white/5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 px-6 lg:px-10">
             {project.metrics.map((m, i) => (
               <motion.div
                 key={m.label}

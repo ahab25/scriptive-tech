@@ -27,7 +27,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-8">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
                 Menu

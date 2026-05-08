@@ -49,7 +49,7 @@ export function Testimonials() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -24, filter: "blur(8px)" }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-display text-3xl leading-[1.1] tracking-[-0.01em] text-white md:text-5xl"
+                  className="font-display text-2xl leading-[1.1] tracking-[-0.01em] text-white sm:text-3xl md:text-5xl"
                 >
                   <span className="mr-2 text-neon-cyan">"</span>
                   {current.quote}
@@ -57,7 +57,7 @@ export function Testimonials() {
                 </motion.blockquote>
               </AnimatePresence>
 
-              <div className="mt-12 flex items-end justify-between gap-4">
+              <div className="mt-8 flex items-end justify-between gap-2 sm:mt-12 sm:gap-4">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`${idx}-meta`}
