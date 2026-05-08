@@ -310,7 +310,7 @@ export const PORTFOLIO: readonly PortfolioItem[] = [
     location: "USA",
     color: "from-neon-magenta/30 to-neon-cyan/20",
     liveUrl: "https://bellanoorskincare.com/",
-    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1400&q=80",
+    image: "/images/Project/bellanoor.png",
     images: [
       "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
@@ -342,7 +342,7 @@ export const PORTFOLIO: readonly PortfolioItem[] = [
     location: "Turkey",
     color: "from-neon-violet/30 to-neon-magenta/20",
     liveUrl: "https://burga.com/",
-    image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1400&q=80",
+    image: "/images/Project/burga.png",
     images: [
       "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1200&q=80",
@@ -374,7 +374,7 @@ export const PORTFOLIO: readonly PortfolioItem[] = [
     location: "Europe",
     color: "from-neon-cyan/30 to-neon-violet/20",
     liveUrl: "https://www.tikl.io/",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    image: "/images/Project/Tikl.png",
     images: [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",
