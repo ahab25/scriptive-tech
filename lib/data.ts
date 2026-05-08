@@ -105,7 +105,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     id: "seo",
-    index: "06",
+    index: "05",
     title: "SEO & Search Strategy",
     summary:
       "Organic growth engineered from the ground up — technical audits, content architecture, and authority building that compounds.",
@@ -127,7 +127,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     id: "ai",
-    index: "07",
+    index: "06",
     title: "AI Bot Integration",
     summary:
       "Production-grade LLM and agent workflows — support bots, copilots, retrieval pipelines, evaluation.",
@@ -149,7 +149,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     id: "ecommerce",
-    index: "08",
+    index: "07",
     title: "E-commerce",
     summary:
       "Storefronts engineered for conversion. Shopify Hydrogen, headless Commerce, custom checkouts.",
@@ -171,7 +171,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     id: "3d",
-    index: "11",
+    index: "08",
     title: "3D Animations",
     summary:
       "Real-time WebGL and rendered CG — the kind of craft that puts work on Awwwards.",
@@ -193,7 +193,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     id: "custom",
-    index: "12",
+    index: "09",
     title: "Custom Software",
     summary:
       "Bespoke platforms for teams that have outgrown off-the-shelf tools. Architected to scale.",
