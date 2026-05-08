@@ -104,28 +104,6 @@ export const SERVICES: readonly Service[] = [
     accent: "lime",
   },
   {
-    id: "smm",
-    index: "05",
-    title: "Social Media",
-    summary:
-      "Culture-aware content strategy and production that earns attention instead of buying it.",
-    detail: {
-      description:
-        "Scroll-stopping content is a craft. We embed in your brand voice, build a content architecture that plays to each platform's algorithm, and produce assets in-house — photography direction, motion graphics, copy — so everything lands as a coherent piece of brand building, not just filler posts.",
-      deliverables: [
-        "Platform-specific content strategy",
-        "Monthly editorial calendar",
-        "Branded asset templates (Figma & AE)",
-        "Caption copywriting & hashtag research",
-        "Community management playbook",
-        "Monthly performance report & pivots",
-      ],
-      tech: ["Later", "Notion", "CapCut Pro", "Adobe After Effects", "Figma", "Canva Pro"],
-    },
-    tags: ["Strategy", "Production", "Community"],
-    accent: "cyan",
-  },
-  {
     id: "seo",
     index: "06",
     title: "SEO & Search Strategy",
@@ -190,50 +168,6 @@ export const SERVICES: readonly Service[] = [
     },
     tags: ["Shopify", "Stripe", "Headless"],
     accent: "lime",
-  },
-  {
-    id: "graphics",
-    index: "09",
-    title: "Graphic Design",
-    summary:
-      "Editorial-quality graphics, social kits, decks, and campaign assets with a distinct point of view.",
-    detail: {
-      description:
-        "Every business needs visuals that communicate clearly and carry their brand with confidence. We produce editorial-quality graphics — presentation decks that close deals, campaign assets that stop scrolls, and print collateral that holds its own alongside the best in the world. Rooted in typographic rigour and a strong compositional instinct.",
-      deliverables: [
-        "Presentation / pitch deck design",
-        "Campaign visual direction & asset suite",
-        "Social media creative kit",
-        "Print collateral (brochures, posters, packaging)",
-        "Infographic & data visualisation",
-        "Branded icon & illustration set",
-      ],
-      tech: ["Figma", "Illustrator", "InDesign", "Photoshop", "After Effects"],
-    },
-    tags: ["Editorial", "Campaigns", "Print"],
-    accent: "cyan",
-  },
-  {
-    id: "video",
-    index: "10",
-    title: "Video Editing",
-    summary:
-      "Narrative-driven edits, motion graphics, and colour work that carry your story from first frame to last.",
-    detail: {
-      description:
-        "Video is the highest-bandwidth storytelling medium we have. We edit with narrative intention — building tension, guiding emotion, landing messages — then layer in motion graphics and colour grading that makes the final cut feel cinematic, not corporate. From brand films to product demos to social reels, every second is precious.",
-      deliverables: [
-        "Multi-format edit (16:9, 9:16, 1:1, 4:5)",
-        "Motion graphics & title sequences",
-        "Colour grade & LUT application",
-        "Sound design & mix",
-        "Subtitles & accessibility captions",
-        "Delivery in platform-optimised formats",
-      ],
-      tech: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Audition", "Frame.io"],
-    },
-    tags: ["Narrative", "Motion", "Color"],
-    accent: "violet",
   },
   {
     id: "3d",
