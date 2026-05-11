@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "We're based overseas — can we still work together?",
-    a: "Absolutely. We operate across UAE, Pakistan, and the USA, and the majority of our clients are remote. We run async-first workflows with weekly video syncs, shared project boards, and clear documentation at every stage. Time zones have never stopped a great collaboration.",
+    a: "Absolutely. We operate across the USA and UAE, and the majority of our clients are remote. We run async-first workflows with weekly video syncs, shared project boards, and clear documentation at every stage. Time zones have never stopped a great collaboration.",
   },
   {
     q: "What happens after my project goes live?",

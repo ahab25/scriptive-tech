@@ -6,7 +6,7 @@ export const SITE = {
   url: "https://scriptive.tech",
   email: "hello@scriptive.tech",
   phone: "+1 510 373 8620",
-  address: "UAE · USA",
+  address: "USA · UAE",
   ogImage: "/og.svg",
   author: "SCRIPTIVE Studio",
   locale: "en_US",
