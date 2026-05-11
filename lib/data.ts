@@ -251,27 +251,39 @@ export const PROCESS_STEPS = [
 export const TESTIMONIALS = [
   {
     quote:
-      "SCRIPTIVE didn't just redesign our product — they rewrote our trajectory. Conversion is up 42% since launch.",
-    name: "Amara Okafor",
-    role: "CEO, Finchley Labs",
+      "SCRIPTIVE transformed Bella Noor from a local skincare brand into a premium digital experience. Our online sales doubled within 60 days of launch — the site sells for us around the clock.",
+    name: "Noor Al-Rashid",
+    role: "Founder, Bella Noor Skincare",
   },
   {
     quote:
-      "The 3D hero they built became the most-shared asset in our launch. Clients keep asking where we found them.",
-    name: "Daniel Reyes",
-    role: "Head of Brand, Northbeam",
+      "We needed a storefront as bold as our cases. SCRIPTIVE nailed it — the design system they built scales across every campaign we run. Our conversion rate has never been higher.",
+    name: "Emre Demir",
+    role: "Head of E-commerce, Burga",
   },
   {
     quote:
-      "Most vendors deliver to spec. SCRIPTIVE delivered to vision — and made the vision sharper along the way.",
-    name: "Priya Shah",
-    role: "VP Product, Mercato",
+      "The Tikl platform had to feel effortless for creators and technically airtight under the hood. SCRIPTIVE delivered both. The team understood product at a level most design studios simply don't.",
+    name: "Lars Eriksson",
+    role: "Co-founder & CPO, Tikl.io",
   },
   {
     quote:
-      "The craft is obvious. Motion, typography, performance — everything considered. A true design partner.",
-    name: "Takeshi Morita",
-    role: "Creative Director, Kōen",
+      "DeFi interfaces are notoriously intimidating. SCRIPTIVE made StellaSwap feel approachable without dumbing anything down. Liquidity participation jumped 38% after the redesign.",
+    name: "Marcus Vance",
+    role: "Product Lead, StellaSwap",
+  },
+  {
+    quote:
+      "Online enquiries tripled in two months. The brand identity they built gave us the credibility to compete with agencies three times our size. Best investment we've made in the business.",
+    name: "Tariq Hussain",
+    role: "Director, Deluxe Holidays",
+  },
+  {
+    quote:
+      "Every detail of the Ivory Aesthetics site was considered — the typography, the photography treatment, the micro-animations. Clients comment on the website before they even walk through the door.",
+    name: "Dr. Layla Hassan",
+    role: "Founder & Clinical Director, Ivory Aesthetics",
   },
 ] as const;
 
