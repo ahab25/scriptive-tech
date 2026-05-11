@@ -264,8 +264,8 @@ export const TESTIMONIALS = [
   {
     quote:
       "The Tikl platform had to feel effortless for creators and technically airtight under the hood. SCRIPTIVE delivered both. The team understood product at a level most design studios simply don't.",
-    name: "Lars Eriksson",
-    role: "Co-founder & CPO, Tikl.io",
+    name: "Eric Hensel",
+    role: "Co-founder, Tikl.io",
   },
   {
     quote:
