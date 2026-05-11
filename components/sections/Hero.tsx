@@ -73,7 +73,7 @@ export function Hero() {
           transition={{ delay: 2.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.25em] text-white/40"
         >
-          <span>[ studio / karachi ]</span>
+          <span>[ studio / california ]</span>
           <span className="hidden sm:inline">[ est. 2020 — digital studio ]</span>
         </motion.div>
 

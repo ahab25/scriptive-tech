@@ -133,7 +133,7 @@ export function Contact() {
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
                     Studio
                   </span>
-                  <span className="text-white">UAE · Pakistan · USA</span>
+                  <span className="text-white">UAE · USA</span>
                 </div>
               </div>
             </div>
@@ -182,7 +182,7 @@ export function Contact() {
                             type="button"
                             data-cursor="hover"
                             onClick={() => toggle(opt)}
-                            aria-pressed={active}
+                            aria-pressed={!!active}
                             className={cn(
                               "focus-ring rounded-full border px-4 py-2.5 text-sm transition-all",
                               active
@@ -208,7 +208,7 @@ export function Contact() {
                           key={b}
                           type="button"
                           data-cursor="hover"
-                          aria-pressed={budget === b}
+                          aria-pressed={budget === b ? true : false}
                           onClick={() => setBudget((cur) => (cur === b ? null : b))}
                           className={cn(
                             "focus-ring rounded-full border px-4 py-2.5 text-sm transition-all",
