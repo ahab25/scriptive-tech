@@ -106,7 +106,7 @@ export function Footer() {
             © {new Date().getFullYear()} {SITE.name} — all rights reserved
           </div>
           <div className="font-mono uppercase tracking-[0.2em]">
-            Designed &amp; built in-house · Karachi · Remote · Worldwide
+            Designed &amp; built in-house · California · Remote · Worldwide
           </div>
         </div>
       </div>
