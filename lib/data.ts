@@ -252,7 +252,7 @@ export const TESTIMONIALS = [
   {
     quote:
       "SCRIPTIVE transformed Bella Noor from a local skincare brand into a premium digital experience. Our online sales doubled within 60 days of launch — the site sells for us around the clock.",
-    name: "Noor Al-Rashid",
+    name: "Angel Pakal",
     role: "Founder, Bella Noor Skincare",
   },
   {
