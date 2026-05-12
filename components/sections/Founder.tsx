@@ -213,7 +213,7 @@ export function Founder() {
               className="flex flex-wrap items-center gap-4"
             >
               <a
-                href="https://www.linkedin.com/in/ahab-khan"
+                href="https://www.linkedin.com/in/ahabkhan25"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="hover"
