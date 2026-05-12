@@ -123,12 +123,52 @@ export function Founder() {
 
             {/* Headline */}
             <div>
-              <RevealText
-                as="h2"
-                className="font-display text-display-md text-white text-balance leading-[1.05]"
+              {/* Role badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-neon-cyan/25 bg-neon-cyan/8 px-4 py-1.5"
               >
-                Engineer. Designer. Entrepreneur.
-              </RevealText>
+                <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan animate-pulse" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-neon-cyan">
+                  Founder &amp; CEO · SCRIPTIVE
+                </span>
+              </motion.div>
+
+              {/* Main heading */}
+              <div className="overflow-hidden">
+                <motion.h2
+                  initial={{ opacity: 0, y: 48 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-display text-[2.6rem] leading-[1.0] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+                >
+                  <span className="text-white">Technical founder.</span>
+                  <br />
+                  <span className="bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-magenta bg-clip-text text-transparent">
+                    Product obsessive.
+                  </span>
+                </motion.h2>
+              </div>
+
+              {/* Decorative rule */}
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformOrigin: "left" }}
+                className="mt-5 flex items-center gap-4"
+              >
+                <div className="h-px flex-1 max-w-[180px] bg-gradient-to-r from-neon-cyan/60 to-transparent" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
+                  Studio builder since 2020
+                </span>
+              </motion.div>
+
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
