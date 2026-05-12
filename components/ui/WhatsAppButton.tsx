@@ -16,7 +16,7 @@ export function WhatsAppButton() {
       transition={{ delay: 3, duration: 0.4, type: "spring", stiffness: 200 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30"
+      className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30"
     >
       {/* WhatsApp icon */}
       <svg viewBox="0 0 24 24" fill="white" className="h-7 w-7">

@@ -74,7 +74,7 @@ export function ChatWidget() {
         transition={{ delay: 3.2, duration: 0.4, type: "spring", stiffness: 200 }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-neon-cyan shadow-lg shadow-neon-cyan/30"
+        className="fixed bottom-[max(6rem,calc(6rem+env(safe-area-inset-bottom)))] right-[max(1.5rem,env(safe-area-inset-right))] z-40 flex h-14 w-14 items-center justify-center rounded-full bg-neon-cyan shadow-lg shadow-neon-cyan/30"
       >
         <AnimatePresence mode="wait" initial={false}>
           {open ? (
@@ -112,7 +112,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-44 right-6 z-50 flex w-[min(360px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-obsidian-1000/95 shadow-2xl backdrop-blur-xl max-h-[min(520px,70dvh)]"
+            className="fixed bottom-[calc(11rem+env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[45] flex w-[min(360px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-obsidian-1000/95 shadow-2xl backdrop-blur-xl max-h-[min(520px,70dvh)]"
           >
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-white/5 px-4 py-3">

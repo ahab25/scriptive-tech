@@ -21,8 +21,10 @@ export function Cursor() {
 
   const [variant, setVariant] = useState<"default" | "hover" | "text">("default");
   const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Disable on coarse pointers (touch)
     if (window.matchMedia("(hover: none)").matches) return;
 
@@ -49,9 +51,8 @@ export function Cursor() {
     };
   }, [mouseX, mouseY, visible]);
 
-  if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
-    return null;
-  }
+  if (!mounted) return null;
+  if (window.matchMedia("(hover: none)").matches) return null;
 
   return (
     <>

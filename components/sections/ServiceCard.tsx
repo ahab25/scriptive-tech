@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
 import type { Service } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -103,6 +104,11 @@ export function ServiceCard({ service, onExplore }: Props) {
   const my = useMotionValue(0);
   const rotX = useMotionValue(0);
   const rotY = useMotionValue(0);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+  }, []);
 
   const spotlight = useMotionTemplate`radial-gradient(360px circle at ${mx}px ${my}px, rgba(29,106,255,0.10), transparent 55%)`;
 
@@ -110,8 +116,10 @@ export function ServiceCard({ service, onExplore }: Props) {
     const r = e.currentTarget.getBoundingClientRect();
     mx.set(e.clientX - r.left);
     my.set(e.clientY - r.top);
-    rotY.set(((e.clientX - r.left) / r.width - 0.5) * 8);
-    rotX.set(-((e.clientY - r.top) / r.height - 0.5) * 8);
+    if (!isTouch) {
+      rotY.set(((e.clientX - r.left) / r.width - 0.5) * 8);
+      rotX.set(-((e.clientY - r.top) / r.height - 0.5) * 8);
+    }
   };
   const onLeave = () => { rotX.set(0); rotY.set(0); };
 
@@ -123,9 +131,9 @@ export function ServiceCard({ service, onExplore }: Props) {
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       whileHover={{ y: -6 }}
-      style={{ rotateX: rotX, rotateY: rotY, transformPerspective: 1200, transformStyle: "preserve-3d" }}
+      style={isTouch ? {} : { rotateX: rotX, rotateY: rotY, transformPerspective: 1200, transformStyle: "preserve-3d" }}
       transition={{ type: "spring", damping: 28, stiffness: 200 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.025] will-change-transform hover:border-white/20 hover:bg-white/[0.04] transition-colors duration-500"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.04] transition-colors duration-500"
     >
       {/* Corner glow */}
       <div aria-hidden className={cn("pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br opacity-30 blur-3xl transition-opacity duration-500 group-hover:opacity-60", ACCENT_GLOW[service.accent])} />

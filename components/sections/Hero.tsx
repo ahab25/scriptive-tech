@@ -29,7 +29,7 @@ export function Hero() {
     <section
       id="top"
       ref={sectionRef}
-      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden"
+      className="relative h-svh-safe min-h-[640px] w-full overflow-hidden"
     >
       {/* 3D layer — parallax on scroll */}
       <motion.div className="absolute inset-0" style={{ y }}>

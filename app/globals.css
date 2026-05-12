@@ -31,6 +31,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%; /* prevent iOS auto font-size on orientation change */
+  text-size-adjust: 100%;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: #1D6AFF #020612;
+  scrollbar-width: thin;
 }
 
 body {
@@ -74,6 +82,12 @@ body {
    UTILITIES
 ----------------------------------------------------------------- */
 @layer utilities {
+  /* svh with 100vh fallback for iOS <15.4 and older Android */
+  .h-svh-safe {
+    height: 100vh;
+    height: 100svh;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -102,6 +116,18 @@ body {
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Reduce blur cost on low-end mobile */
+  @media (max-width: 768px) {
+    .glass {
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+    }
+    .glass-strong {
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+    }
   }
 
   /* Brand blue gradient text — animated shimmer */

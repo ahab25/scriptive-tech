@@ -42,7 +42,7 @@ export function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 2, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          "fixed left-0 right-0 top-0 z-50 transition-[padding,background-color,backdrop-filter] duration-500",
+          "fixed left-0 right-0 top-0 z-50 transition-[padding,background-color,backdrop-filter] duration-500 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]",
           scrolled ? "py-3 backdrop-blur-xl bg-obsidian-1000/70 border-b border-white/5" : "py-6",
         )}
       >
