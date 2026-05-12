@@ -3,7 +3,6 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { SectionLabel } from "../ui/SectionLabel";
-import { RevealText } from "../ui/RevealText";
 
 const EXPERTISE = [
   "Full-Stack Engineering",
@@ -76,7 +75,7 @@ function StatCard({ value, label, accent, index }: { value: string; label: strin
       {/* Mouse spotlight */}
       <motion.div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: spot }} />
       {/* Top accent bar */}
-      <div aria-hidden className={`absolute inset-x-0 top-0 h-[2px] w-0 transition-all duration-500 group-hover:w-full ${STAT_BAR[accent]}`} style={{ opacity: 0.7 }} />
+      <div aria-hidden className={`absolute inset-x-0 top-0 h-[2px] w-0 opacity-70 transition-all duration-500 group-hover:w-full ${STAT_BAR[accent]}`} />
 
       <div className={`relative font-display text-4xl tracking-[-0.02em] transition-colors duration-300 ${STAT_TEXT[accent]}`}>
         {value}
@@ -113,7 +112,7 @@ export function Founder() {
       <motion.div aria-hidden className="pointer-events-none absolute inset-0 opacity-60" style={{ background: spotlight }} />
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel index="07">The person behind the work</SectionLabel>
+        <SectionLabel index="07">The man behind Scriptive</SectionLabel>
 
         <div className="mt-16 grid gap-16 lg:grid-cols-12 lg:gap-20 lg:items-center">
 
