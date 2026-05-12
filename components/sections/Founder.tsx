@@ -17,11 +17,76 @@ const EXPERTISE = [
 ];
 
 const EXPOSURE = [
-  { value: "5+", label: "Years building" },
-  { value: "140+", label: "Products shipped" },
-  { value: "15+", label: "Countries" },
-  { value: "6", label: "Industry verticals" },
-];
+  { value: "5+",   label: "Years building",    accent: "cyan"    },
+  { value: "140+", label: "Products shipped",  accent: "violet"  },
+  { value: "15+",  label: "Countries",         accent: "magenta" },
+  { value: "6",    label: "Industry verticals",accent: "lime"    },
+] as const;
+
+type Accent = "cyan" | "violet" | "magenta" | "lime";
+
+const STAT_TEXT: Record<Accent, string> = {
+  cyan:    "text-neon-cyan",
+  violet:  "text-neon-violet",
+  magenta: "text-neon-magenta",
+  lime:    "text-neon-lime",
+};
+const STAT_GLOW: Record<Accent, string> = {
+  cyan:    "from-neon-cyan/15 to-transparent",
+  violet:  "from-neon-violet/15 to-transparent",
+  magenta: "from-neon-magenta/15 to-transparent",
+  lime:    "from-neon-lime/15 to-transparent",
+};
+const STAT_BORDER_HOVER: Record<Accent, string> = {
+  cyan:    "group-hover:border-neon-cyan/50",
+  violet:  "group-hover:border-neon-violet/50",
+  magenta: "group-hover:border-neon-magenta/50",
+  lime:    "group-hover:border-neon-lime/50",
+};
+const STAT_BAR: Record<Accent, string> = {
+  cyan:    "bg-neon-cyan",
+  violet:  "bg-neon-violet",
+  magenta: "bg-neon-magenta",
+  lime:    "bg-neon-lime",
+};
+
+function StatCard({ value, label, accent, index }: { value: string; label: string; accent: Accent; index: number }) {
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const spot = useMotionTemplate`radial-gradient(120px circle at ${mx}px ${my}px, rgba(255,255,255,0.06), transparent 70%)`;
+
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set(e.clientX - r.left);
+    my.set(e.clientY - r.top);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -5, scale: 1.03 }}
+      onPointerMove={onMove}
+      className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.025] px-4 py-5 text-center transition-colors duration-300 ${STAT_BORDER_HOVER[accent]}`}
+    >
+      {/* Corner glow */}
+      <div aria-hidden className={`pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gradient-to-br blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${STAT_GLOW[accent]}`} />
+      {/* Mouse spotlight */}
+      <motion.div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: spot }} />
+      {/* Top accent bar */}
+      <div aria-hidden className={`absolute inset-x-0 top-0 h-[2px] w-0 transition-all duration-500 group-hover:w-full ${STAT_BAR[accent]}`} style={{ opacity: 0.7 }} />
+
+      <div className={`relative font-display text-4xl tracking-[-0.02em] transition-colors duration-300 ${STAT_TEXT[accent]}`}>
+        {value}
+      </div>
+      <div className="relative mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 transition-colors duration-300 group-hover:text-white/60">
+        {label}
+      </div>
+    </motion.div>
+  );
+}
 
 export function Founder() {
   const mx = useMotionValue(0);
@@ -196,53 +261,43 @@ export function Founder() {
             </div>
 
             {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 gap-4 sm:grid-cols-4"
-            >
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {EXPOSURE.map((e, i) => (
-                <motion.div
-                  key={e.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 + i * 0.08 }}
-                  className="rounded-xl border border-white/8 bg-white/[0.025] px-4 py-4 text-center"
-                >
-                  <div className="font-display text-3xl text-neon-cyan">{e.value}</div>
-                  <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-white/50">{e.label}</div>
-                </motion.div>
+                <StatCard key={e.label} value={e.value} label={e.label} accent={e.accent} index={i} />
               ))}
-            </motion.div>
+            </div>
 
             {/* Expertise */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-white/40">
-                Domains &amp; expertise
-              </div>
+            <div>
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-4 flex items-center gap-3"
+              >
+                <span className="h-px w-6 bg-neon-cyan/40" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/40">
+                  Domains &amp; expertise
+                </span>
+              </motion.div>
               <div className="flex flex-wrap gap-2">
                 {EXPERTISE.map((tag, i) => (
                   <motion.span
                     key={tag}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 10, scale: 0.92 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className="rounded-full border border-neon-cyan/20 bg-neon-cyan/5 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-neon-cyan/80"
+                    transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -3, scale: 1.06 }}
+                    className="group inline-flex cursor-default items-center gap-1.5 rounded-full border border-neon-cyan/20 bg-neon-cyan/5 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-neon-cyan/80 transition-all duration-300 hover:border-neon-cyan/50 hover:bg-neon-cyan/10 hover:text-neon-cyan"
                   >
+                    <span className="h-1 w-1 rounded-full bg-neon-cyan/50 transition-all duration-300 group-hover:bg-neon-cyan" />
                     {tag}
                   </motion.span>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* CTA */}
             <motion.div
