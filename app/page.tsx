@@ -2,6 +2,7 @@ import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { FAQ } from "@/components/sections/FAQ";
 import { Footer } from "@/components/sections/Footer";
+import { Founder } from "@/components/sections/Founder";
 import { Hero } from "@/components/sections/Hero";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
@@ -51,6 +52,7 @@ export default function HomePage() {
         <Portfolio />
         <Process />
         <Testimonials />
+        <Founder />
         <FAQ />
         <Contact />
       </main>

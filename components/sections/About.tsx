@@ -123,7 +123,7 @@ export function About() {
           <div className="mb-4 flex items-center gap-3">
             <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />
             <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/50">
-              SCRIPTIVE HQ · Karachi, Pakistan
+              SCRIPTIVE HQ · California, USA
             </span>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:h-[520px] sm:grid-cols-3 sm:grid-rows-3 sm:gap-3">
