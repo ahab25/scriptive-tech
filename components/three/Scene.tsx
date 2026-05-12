@@ -7,24 +7,18 @@ import * as THREE from "three";
 type Props = {
   children: ReactNode;
   className?: string;
-  /** Camera FOV — lower = more telephoto / luxury feel. Default 35. */
   fov?: number;
+  /** Cap DPR at 1.5 on mobile to reduce GPU load */
+  isMobile?: boolean;
 };
 
-/**
- * Shared R3F canvas wrapper tuned for this project:
- *   - ACES-filmic tone mapping → cinematic contrast
- *   - sRGB output colour space → colours match design tokens
- *   - DPR capped at 2 → retina without GPU thrash
- *   - alpha transparent → DOM gradient layers show through
- */
-export function Scene({ children, className, fov = 35 }: Props) {
+export function Scene({ children, className, fov = 35, isMobile = false }: Props) {
   return (
     <Canvas
       className={className}
-      dpr={[1, 2]}
+      dpr={isMobile ? [1, 1.5] : [1, 2]}
       gl={{
-        antialias: true,
+        antialias: !isMobile,
         alpha: true,
         powerPreference: "high-performance",
         toneMapping: THREE.ACESFilmicToneMapping,

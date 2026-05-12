@@ -9,15 +9,22 @@ import {
 import { BlendFunction } from "postprocessing";
 import { Vector2 } from "three";
 
+type Props = { isMobile: boolean };
+
 /**
- * The post FX chain that gives the hero its "premium" finish:
- *   - Bloom: neon highlights bleed into their surroundings
- *   - Chromatic aberration: a hair of RGB split at the edges
- *   - Vignette: subtle darkened corners keep focus centered
- *
- * Tuned conservatively — aggressive post makes sites feel cheap.
+ * Post FX chain — full on desktop, vignette-only on mobile.
+ * Bloom + chromatic aberration are GPU-expensive; skip them on
+ * touch devices to maintain 60fps on mid-range Android/iOS.
  */
-export function HeroPostFX() {
+export function HeroPostFX({ isMobile }: Props) {
+  if (isMobile) {
+    return (
+      <EffectComposer multisampling={0}>
+        <Vignette eskil={false} offset={0.2} darkness={0.5} />
+      </EffectComposer>
+    );
+  }
+
   return (
     <EffectComposer multisampling={0}>
       <Bloom

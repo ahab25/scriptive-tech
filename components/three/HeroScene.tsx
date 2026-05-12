@@ -11,13 +11,21 @@ import { Scene } from "./Scene";
 export function HeroScene() {
   const scrollProgress = useRef(0);
   const [showRings, setShowRings] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
+    const touch = window.matchMedia("(hover: none)");
     setShowRings(!mq.matches);
-    const handler = (e: MediaQueryListEvent) => setShowRings(!e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    setIsMobile(touch.matches);
+    const onMq    = (e: MediaQueryListEvent) => setShowRings(!e.matches);
+    const onTouch = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onMq);
+    touch.addEventListener("change", onTouch);
+    return () => {
+      mq.removeEventListener("change", onMq);
+      touch.removeEventListener("change", onTouch);
+    };
   }, []);
 
   useEffect(() => {
@@ -31,7 +39,7 @@ export function HeroScene() {
   }, []);
 
   return (
-    <Scene className="!absolute inset-0" fov={32}>
+    <Scene className="!absolute inset-0" fov={32} isMobile={isMobile}>
       {/* Navy atmosphere */}
       <color attach="background" args={["#04091a"]} />
       <fog attach="fog" args={["#04091a", 7, 18]} />
@@ -52,14 +60,14 @@ export function HeroScene() {
         <GlobeObject scrollProgress={scrollProgress} showRings={showRings} />
       </Float>
 
-      {/* Ambient deep-space particle field */}
-      <HeroParticles count={1200} radius={9} />
+      {/* Fewer particles on mobile to maintain 60fps */}
+      <HeroParticles count={isMobile ? 400 : 1200} radius={9} />
 
       {/* Scroll-driven camera pull-back */}
       <CameraRig scrollProgress={scrollProgress} />
 
-      {/* Post FX: bloom makes the rings + particles glow */}
-      <HeroPostFX />
+      {/* Post FX: full on desktop, vignette-only on mobile */}
+      <HeroPostFX isMobile={isMobile} />
     </Scene>
   );
 }

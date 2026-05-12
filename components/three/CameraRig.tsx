@@ -24,7 +24,7 @@ export function CameraRig({ scrollProgress }: Props) {
     camera.lookAt(0, 0, 0);
   }, [camera]);
 
-  useFrame(() => {
+  useFrame((_, dt) => {
     const p = scrollProgress.current;
 
     // Target pose: z recedes from 6 → 9, y tilts up slightly
@@ -32,10 +32,11 @@ export function CameraRig({ scrollProgress }: Props) {
     target.current.y = pointer.y * 0.4 + p * 0.6;
     target.current.z = 6 + p * 3;
 
-    // Smooth the camera toward the target
-    camera.position.x += (target.current.x - camera.position.x) * 0.05;
-    camera.position.y += (target.current.y - camera.position.y) * 0.05;
-    camera.position.z += (target.current.z - camera.position.z) * 0.05;
+    // dt-based lerp — framerate-independent (smooth on 60Hz AND 120Hz ProMotion)
+    const t = 1 - Math.exp(-3 * dt);
+    camera.position.x += (target.current.x - camera.position.x) * t;
+    camera.position.y += (target.current.y - camera.position.y) * t;
+    camera.position.z += (target.current.z - camera.position.z) * t;
 
     camera.lookAt(0, 0, 0);
   });

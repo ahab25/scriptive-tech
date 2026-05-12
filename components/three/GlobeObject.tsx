@@ -27,7 +27,7 @@ function OrbitRing({ radius, tube, tilt, speed, color, opacity }: OrbitProps) {
       <group ref={groupRef}>
         {/* Ring path */}
         <mesh>
-          <torusGeometry args={[radius, tube, 2, 256]} />
+          <torusGeometry args={[radius, tube, 2, 80]} />
           <meshBasicMaterial color={color} transparent opacity={opacity} depthWrite={false} />
         </mesh>
         {/* Leading satellite */}
@@ -45,41 +45,38 @@ function OrbitRing({ radius, tube, tilt, speed, color, opacity }: OrbitProps) {
   );
 }
 
-/** Dot markers distributed at strategic lat/lon positions on the globe surface. */
+/** Dot markers — single InstancedMesh = 1 draw call instead of 10. */
 function SurfaceDots({ radius }: { radius: number }) {
-  const positions = useMemo<[number, number, number][]>(() => {
-    const pts: [number, number][]=  [
-      [40.7, -74.0],   // New York
-      [51.5, -0.1],    // London
-      [35.7, 139.7],   // Tokyo
-      [22.3, 114.2],   // Hong Kong
-      [1.3, 103.8],    // Singapore
-      [48.9, 2.3],     // Paris
-      [37.6, -122.4],  // San Francisco
-      [19.1, 72.9],    // Mumbai
-      [-33.9, 151.2],  // Sydney
-      [55.8, 37.6],    // Moscow
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+
+  const matrices = useMemo(() => {
+    const pts: [number, number][] = [
+      [40.7, -74.0],  [51.5, -0.1],   [35.7, 139.7],
+      [22.3, 114.2],  [1.3, 103.8],   [48.9, 2.3],
+      [37.6, -122.4], [19.1, 72.9],   [-33.9, 151.2],
+      [55.8, 37.6],
     ];
     return pts.map(([lat, lon]) => {
-      const phi = (90 - lat) * (Math.PI / 180);
+      const phi   = (90 - lat) * (Math.PI / 180);
       const theta = (lon + 180) * (Math.PI / 180);
-      return [
+      const m = new THREE.Matrix4();
+      m.setPosition(
         radius * Math.sin(phi) * Math.cos(theta),
         radius * Math.cos(phi),
         radius * Math.sin(phi) * Math.sin(theta),
-      ];
+      );
+      return m;
     });
   }, [radius]);
 
+  // Apply instance matrices once after mount
+  const geom = useMemo(() => new THREE.SphereGeometry(0.022, 6, 6), []);
+  const mat  = useMemo(() => new THREE.MeshBasicMaterial({ color: "#4D8FFF" }), []);
+
   return (
-    <>
-      {positions.map((pos, i) => (
-        <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.022, 6, 6]} />
-          <meshBasicMaterial color="#4D8FFF" />
-        </mesh>
-      ))}
-    </>
+    <instancedMesh ref={meshRef} args={[geom, mat, matrices.length]}
+      onUpdate={(self) => matrices.forEach((m, i) => self.setMatrixAt(i, m))}
+    />
   );
 }
 
